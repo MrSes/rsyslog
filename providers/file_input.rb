@@ -29,11 +29,11 @@ action :create do
     group node['rsyslog']['group']
     source new_resource.source
     cookbook new_resource.cookbook
-    variables 'file_name' => new_resource.file,
+    variables({ 'file_name' => new_resource.file,
               'tag' => new_resource.name,
               'state_file' => new_resource.name,
               'severity' => new_resource.severity,
-              'facility' => new_resource.facility
+              'facility' => new_resource.facility })
     notifies :restart, resources('service[rsyslog]')
   end
 end
